@@ -7,11 +7,11 @@
     <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700&display=swap" rel="stylesheet">
     <style>
         :root {
-            --bg-dark-green: #003A33;  /* لون الخلفية الغامق */
-            --text-gold: #A6935F;      /* اللون الذهبي للنصوص والحدود */
-            --text-white: #FFFFFF;     /* اللون الأبيض */
-            --input-bg: #F9F9F9;       /* خلفية حقول الإدخال الفاتحة */
-            --placeholder-gray: #C4C4C4; /* لون النص الافتراضي الرمادي */
+            --bg-dark-green: #003A33;  /* الأخضر الغامق */
+            --text-gold: #C5A065;      /* الذهبي الفاتح */
+            --text-white: #FFFFFF;
+            --input-bg: #F4F4F4;
+            --placeholder-gray: #9CA3AF;
         }
 
         body {
@@ -22,72 +22,135 @@
             display: flex;
             flex-direction: column;
             align-items: center;
+            justify-content: center;
             min-height: 100vh;
             box-sizing: border-box;
         }
 
-        /* الشعار والعنوان العلوي */
+        /* حاوية الشعار والعنوان */
         .header-container {
             text-align: center;
-            margin-bottom: 40px;
-            margin-top: 20px;
+            margin-bottom: 30px;
         }
 
+        /* تنسيق أيقونة النسر */
         .logo-eagle {
-            width: 120px;
+            width: 100px;
             height: auto;
             margin-bottom: 15px;
+            filter: drop-shadow(0 4px 6px rgba(0,0,0,0.2));
         }
-        /* كود SVG للنسر الذهبي */
         .logo-eagle path { fill: var(--text-gold); }
 
         .main-title {
             color: var(--text-white);
-            font-size: 2.5rem;
+            font-size: 2.2rem;
             font-weight: 700;
             margin: 0;
+            text-shadow: 0 2px 4px rgba(0,0,0,0.3);
         }
 
-        /* الكرت الأبيض الرئيسي */
+        /* الكرت الأبيض */
         .main-card {
             background-color: var(--text-white);
-            border-radius: 35px; /* زوايا دائرية كبيرة */
-            padding: 40px;
+            border-radius: 25px;
+            padding: 40px 30px;
             width: 100%;
-            max-width: 800px; /* عرض أكبر ليستوعب الحقلين بجانب بعض */
-            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+            max-width: 850px;
+            box-shadow: 0 20px 50px rgba(0,0,0,0.3);
             text-align: center;
+            position: relative;
         }
 
         .card-title {
             color: var(--text-gold);
-            font-size: 1.2rem;
-            font-weight: 600;
-            margin-bottom: 30px;
+            font-size: 1.1rem;
+            font-weight: 700;
+            margin-bottom: 25px;
             line-height: 1.6;
         }
 
-        /* حاوية حقول الإدخال (لتكون بجانب بعضها) */
+        /* تنسيق الحقول */
         .converter-container {
             display: flex;
             align-items: center;
             justify-content: space-between;
-            gap: 20px;
+            gap: 15px;
+        }
+
+        /* الموبايل: جعل الحقول تحت بعضها */
+        @media (max-width: 768px) {
+            .converter-container {
+                flex-direction: column;
+            }
+            .swap-icon {
+                transform: rotate(90deg);
+                margin: 10px 0;
+            }
         }
 
         .input-wrapper {
-            flex: 1; /* يأخذ مساحة متساوية */
+            flex: 1;
             position: relative;
+            width: 100%;
         }
 
-        /* تنسيق حقول الإدخال */
+        /* مربعات الإدخال */
         .custom-input {
             width: 100%;
-            padding: 18px 20px;
+            padding: 15px 20px;
+            padding-left: 50px; /* مساحة لكلمة ل.س */
             font-size: 1.1rem;
-            color: var(--text-gold);
+            color: #555;
             background-color: var(--input-bg);
             border: 2px solid var(--text-gold);
-            border-radius: 15px;
+            border-radius: 50px; /* جعل الحواف دائرية بالكامل مثل التصميم */
             text-align: right;
-            font-family: 'Cairo', sans-
+            font-family: 'Cairo', sans-serif;
+            outline: none;
+            box-sizing: border-box;
+            transition: 0.3s;
+        }
+
+        .custom-input:focus {
+            box-shadow: 0 0 0 4px rgba(197, 160, 101, 0.2);
+            background-color: #fff;
+        }
+
+        /* كلمة ل.س */
+        .currency-suffix {
+            position: absolute;
+            left: 20px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: var(--text-gold);
+            font-weight: 700;
+            font-size: 0.9rem;
+            pointer-events: none;
+        }
+
+        /* أيقونة التبديل */
+        .swap-icon {
+            color: var(--text-gold);
+            font-size: 1.5rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 10px;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="header-container">
+        <svg class="logo-eagle" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path d="M256 0C114.6 0 0 114.6 0 256s114.6 256 256 256 256-114.6 256-256S397.4 0 256 0zM128 256c0-70.7 57.3-128 128-128s128 57.3 128 128-57.3 128-128 128-128-57.3-128-128zm128 96c-53 0-96-43-96-96s43-96 96-96 96 43 96 96-43 96-96 96zM232 96h48v64h-48V96zm0 256h48v64h-48v-64zm-96-128h64v48h-64v-48zm192 0h64v48h-64v-48z"/></svg>
+        <h1 class="main-title">الليرة السورية الجديدة</h1>
+    </div>
+
+    <div class="main-card">
+        <div class="card-title">الليرة السورية القديمة<br>وما يعادلها على الليرة الجديدة</div>
+
+        <div class="converter-container">
+            <div class="input-wrapper">
+                <input type="number" id="oldAmount" class="custom-input" placeholder="ادخل قيمة العملة القديمة" oninput="calculate()">
+                <span class="currency
