@@ -4,19 +4,18 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>الليرة السورية الجديدة</title>
-    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;700;800&display=swap" rel="stylesheet">
     <style>
         :root {
-            --bg-dark-green: #003A33;  /* الأخضر الغامق */
-            --text-gold: #C5A065;      /* الذهبي الفاتح */
-            --text-white: #FFFFFF;
-            --input-bg: #F4F4F4;
-            --placeholder-gray: #9CA3AF;
+            --bg-color: #013430;       /* الأخضر العميق */
+            --gold-color: #CCA456;     /* الذهبي الفاخر */
+            --white-color: #FFFFFF;
+            --input-bg: #F8F8F8;       /* خلفية الحقول */
         }
 
         body {
-            font-family: 'Cairo', sans-serif;
-            background-color: var(--bg-dark-green);
+            background-color: var(--bg-color);
+            font-family: 'Tajawal', sans-serif;
             margin: 0;
             padding: 20px;
             display: flex;
@@ -24,133 +23,180 @@
             align-items: center;
             justify-content: center;
             min-height: 100vh;
-            box-sizing: border-box;
+            color: white;
         }
 
-        /* حاوية الشعار والعنوان */
-        .header-container {
-            text-align: center;
-            margin-bottom: 30px;
-        }
-
-        /* تنسيق أيقونة النسر */
-        .logo-eagle {
-            width: 100px;
+        /* تنسيق النسر */
+        .eagle-icon {
+            width: 140px;
             height: auto;
-            margin-bottom: 15px;
-            filter: drop-shadow(0 4px 6px rgba(0,0,0,0.2));
+            margin-bottom: 10px;
         }
-        .logo-eagle path { fill: var(--text-gold); }
+        .eagle-icon path {
+            fill: var(--gold-color);
+        }
 
-        .main-title {
-            color: var(--text-white);
-            font-size: 2.2rem;
-            font-weight: 700;
-            margin: 0;
-            text-shadow: 0 2px 4px rgba(0,0,0,0.3);
+        /* العنوان الرئيسي */
+        h1 {
+            font-size: 2.8rem;
+            font-weight: 800;
+            margin: 0 0 40px 0;
+            text-align: center;
         }
 
         /* الكرت الأبيض */
-        .main-card {
-            background-color: var(--text-white);
-            border-radius: 25px;
-            padding: 40px 30px;
+        .card {
+            background-color: var(--white-color);
             width: 100%;
-            max-width: 850px;
-            box-shadow: 0 20px 50px rgba(0,0,0,0.3);
+            max-width: 900px;
+            border-radius: 30px;
+            padding: 40px;
+            box-sizing: border-box;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.3);
             text-align: center;
-            position: relative;
         }
 
-        .card-title {
-            color: var(--text-gold);
-            font-size: 1.1rem;
-            font-weight: 700;
-            margin-bottom: 25px;
+        /* نصوص داخل الكرت */
+        .card-header h2 {
+            color: #8D7B58; /* لون بني ذهبي للنص العلوي */
+            font-size: 1.2rem;
+            margin: 0;
             line-height: 1.6;
+            font-weight: 700;
         }
 
-        /* تنسيق الحقول */
-        .converter-container {
-            display: flex;
+        .card-header h2 span {
+            display: block;
+        }
+
+        /* حاوية الحقول (GRID) - السر لظهورها بجانب بعض */
+        .converter-row {
+            display: grid;
+            grid-template-columns: 1fr auto 1fr; /* حقل - سهم - حقل */
+            gap: 20px;
             align-items: center;
-            justify-content: space-between;
-            gap: 15px;
+            margin-top: 30px;
         }
 
-        /* الموبايل: جعل الحقول تحت بعضها */
-        @media (max-width: 768px) {
-            .converter-container {
-                flex-direction: column;
-            }
-            .swap-icon {
-                transform: rotate(90deg);
-                margin: 10px 0;
-            }
-        }
-
-        .input-wrapper {
-            flex: 1;
+        /* تصميم الحقل */
+        .input-group {
             position: relative;
             width: 100%;
         }
 
-        /* مربعات الإدخال */
-        .custom-input {
+        input {
             width: 100%;
-            padding: 15px 20px;
-            padding-left: 50px; /* مساحة لكلمة ل.س */
+            padding: 18px 20px;
+            padding-left: 60px; /* مساحة لكلمة ل.س */
             font-size: 1.1rem;
-            color: #555;
+            border: 2px solid var(--gold-color);
+            border-radius: 50px; /* تدوير كامل للحواف */
             background-color: var(--input-bg);
-            border: 2px solid var(--text-gold);
-            border-radius: 50px; /* جعل الحواف دائرية بالكامل مثل التصميم */
-            text-align: right;
-            font-family: 'Cairo', sans-serif;
+            color: #777;
+            font-family: 'Tajawal', sans-serif;
+            font-weight: bold;
             outline: none;
             box-sizing: border-box;
+            text-align: right;
             transition: 0.3s;
         }
 
-        .custom-input:focus {
-            box-shadow: 0 0 0 4px rgba(197, 160, 101, 0.2);
+        input:focus {
             background-color: #fff;
+            box-shadow: 0 0 10px rgba(204, 164, 86, 0.3);
         }
 
         /* كلمة ل.س */
-        .currency-suffix {
+        .currency-label {
             position: absolute;
-            left: 20px;
+            left: 25px;
             top: 50%;
             transform: translateY(-50%);
-            color: var(--text-gold);
-            font-weight: 700;
-            font-size: 0.9rem;
+            color: #999;
+            font-weight: bold;
             pointer-events: none;
         }
 
-        /* أيقونة التبديل */
-        .swap-icon {
-            color: var(--text-gold);
-            font-size: 1.5rem;
+        /* أيقونة السهم في الوسط */
+        .swap-arrow {
+            color: var(--gold-color);
+            font-size: 2rem;
             display: flex;
             align-items: center;
             justify-content: center;
-            padding: 10px;
         }
+        .swap-arrow svg {
+            width: 40px;
+            height: 40px;
+        }
+
+        /* التوافق مع الجوال */
+        @media (max-width: 768px) {
+            .converter-row {
+                grid-template-columns: 1fr; /* عمود واحد */
+                gap: 15px;
+            }
+            .swap-arrow {
+                transform: rotate(90deg); /* تدوير السهم */
+            }
+            h1 { font-size: 2rem; }
+            .eagle-icon { width: 100px; }
+        }
+
     </style>
 </head>
 <body>
 
-    <div class="header-container">
-        <svg class="logo-eagle" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path d="M256 0C114.6 0 0 114.6 0 256s114.6 256 256 256 256-114.6 256-256S397.4 0 256 0zM128 256c0-70.7 57.3-128 128-128s128 57.3 128 128-57.3 128-128 128-128-57.3-128-128zm128 96c-53 0-96-43-96-96s43-96 96-96 96 43 96 96-43 96-96 96zM232 96h48v64h-48V96zm0 256h48v64h-48v-64zm-96-128h64v48h-64v-48zm192 0h64v48h-64v-48z"/></svg>
-        <h1 class="main-title">الليرة السورية الجديدة</h1>
+    <svg class="eagle-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+        <path d="M256 0c-40 0-75 18-100 48-15 18-25 40-28 65-2 15 2 30 10 42 10 15 25 25 42 28 15 2 30-5 40-15 5-5 10-12 12-20 2-8 0-16-5-22-2-4-8-8-14-8-5 0-10 2-12 6-2 4-2 8 0 12 1 2 4 4 6 4 2 0 4-2 5-4 0-1-1-2-2-2-5 0-8 5-6 10 1 2 4 4 8 4 6 0 10-5 10-10 0-8-5-15-12-18-10-4-20 2-24 10-5 10-2 22 8 28 8 5 18 5 26 0 12-8 15-25 8-38-10-18-35-22-50-10-5 4-8 10-10 15-5 15-2 32 10 45 15 15 38 18 58 8 25-12 35-42 22-68-15-28-50-38-78-22-30 15-42 52-28 82 15 32 55 45 88 28 35-18 48-60 28-95C240 52 195 40 160 62c-38 25-50 75-25 112 25 38 75 50 112 25 40-28 50-80 22-120-30-42-90-52-132-22-45 30-55 92-22 138 32 45 95 55 140 22 48-35 58-102 22-150-38-50-110-60-160-22-52 40-62 115-22 168 42 55 120 65 175 22 58-45 68-128 22-185-48-60-135-70-195-22C38 88 28 178 85 240c60 65 162 75 228 15 68-60 78-165 18-232-62-70-170-80-240-18-72 62-82 172-20 245 65 75 178 85 252 20 78-68 88-185 20-262-70-80-192-90-272-20-82 72-92 198-20 280 75 85 205 95 290 20 88-78 98-210 20-298-80-90-218-100-308-20-92 80-102 220-20 312 85 95 230 105 325 20 98-88 108-232 20-330-90-100-242-110-342-20-102 90-112 245-20 348 95 105 255 115 360 20 108-98 118-258 20-365-100-110-268-120-378-20-112 102-122 270-20 382 105 115 280 125 395 20 118-108 128-282 20-400C392 35 210 25 92 142-25 260-15 442 102 560c118 118 300 108 418-10C628 432 618 250 500 132 382 15 200 25 82 142z"/>
+    </svg>
+
+    <h1>الليرة السورية الجديدة</h1>
+
+    <div class="card">
+        <div class="card-header">
+            <h2>
+                <span>الليرة السورية القديمة</span>
+                <span>وما يعادلها على الليرة الجديدة</span>
+            </h2>
+        </div>
+
+        <div class="converter-row">
+            
+            <div class="input-group">
+                <input type="number" id="oldAmount" placeholder="ادخل قيمة العملة القديمة" oninput="calculate()">
+                <span class="currency-label">ل.س</span>
+            </div>
+
+            <div class="swap-arrow">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M7 16V4m0 0L3 8m4-4l4 4m6 0v12m0 0l4-4m-4 4l-4-4"/>
+                </svg>
+            </div>
+
+            <div class="input-group">
+                <input type="text" id="newAmount" placeholder="قيمتها على العملة الجديدة" readonly>
+                <span class="currency-label">ل.س</span>
+            </div>
+
+        </div>
     </div>
 
-    <div class="main-card">
-        <div class="card-title">الليرة السورية القديمة<br>وما يعادلها على الليرة الجديدة</div>
+    <script>
+        function calculate() {
+            const oldVal = document.getElementById('oldAmount').value;
+            // المعادلة: القسمة على 100
+            const newVal = oldVal / 100;
 
-        <div class="converter-container">
-            <div class="input-wrapper">
-                <input type="number" id="oldAmount" class="custom-input" placeholder="ادخل قيمة العملة القديمة" oninput="calculate()">
-                <span class="currency
+            const newAmountField = document.getElementById('newAmount');
+
+            if (oldVal === "" || oldVal == 0) {
+                newAmountField.value = "";
+            } else {
+                newAmountField.value = newVal.toLocaleString('en-US', { maximumFractionDigits: 2 });
+            }
+        }
+    </script>
+
+</body>
+</html>
