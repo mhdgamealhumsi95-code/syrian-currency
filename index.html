@@ -3,89 +3,91 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>حاسبة العملة السورية</title>
-    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;700&display=swap" rel="stylesheet">
+    <title>الليرة السورية الجديدة</title>
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700&display=swap" rel="stylesheet">
     <style>
-        :root { --primary: #0a4d44; --bg: #f0f0e6; }
+        :root {
+            --bg-dark-green: #003A33;  /* لون الخلفية الغامق */
+            --text-gold: #A6935F;      /* اللون الذهبي للنصوص والحدود */
+            --text-white: #FFFFFF;     /* اللون الأبيض */
+            --input-bg: #F9F9F9;       /* خلفية حقول الإدخال الفاتحة */
+            --placeholder-gray: #C4C4C4; /* لون النص الافتراضي الرمادي */
+        }
+
         body {
             font-family: 'Cairo', sans-serif;
-            background-color: var(--bg);
-            margin: 0; padding: 0;
-            display: flex; justify-content: center; align-items: center;
-            min-height: 100vh; color: #333;
+            background-color: var(--bg-dark-green);
+            margin: 0;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            min-height: 100vh;
+            box-sizing: border-box;
         }
-        .container { width: 90%; max-width: 450px; }
-        .header {
-            background-color: var(--primary); color: white;
-            padding: 20px; text-align: center;
-            border-radius: 0 0 20px 20px; margin-bottom: 30px;
-        }
-        .header h1 { margin: 0; font-size: 1.5rem; }
-        .card {
-            background: white; padding: 25px;
-            border-radius: 15px; text-align: center;
-            box-shadow: 0 10px 25px rgba(0,0,0,0.05);
-        }
-        .input-group { margin-bottom: 25px; text-align: right; }
-        label { display: block; margin-bottom: 8px; font-weight: bold; color: var(--primary); }
-        input[type="number"] {
-            width: 100%; padding: 15px; font-size: 1.5rem;
-            border: 2px solid #ddd; border-radius: 10px;
-            background-color: #f9f9f9; text-align: center;
-            font-family: 'Cairo', sans-serif; box-sizing: border-box;
-            outline: none;
-        }
-        input[type="number"]:focus { border-color: var(--primary); background-color: white; }
-        .result-box {
-            background-color: #e8f5e9; border: 2px solid #a5d6a7;
-            padding: 20px; border-radius: 10px; margin-top: 20px;
-        }
-        .result-title { font-size: 0.9rem; color: #2e7d32; margin-bottom: 5px; }
-        .result-value {
-            font-size: 2.5rem; font-weight: bold;
-            color: var(--primary); direction: ltr;
-        }
-        .currency-symbol { font-size: 1rem; color: #666; margin-top: 5px; }
-        .footer { margin-top: 30px; text-align: center; font-size: 0.8rem; color: #888; }
-    </style>
-</head>
-<body>
 
-    <div class="container">
-        <div class="header">
-            <h1>الليرة السورية الجديدة</h1>
-            <p>حاسبة التحويل (حذف صفرين)</p>
-        </div>
-
-        <div class="card">
-            <div class="input-group">
-                <label for="oldAmount">أدخل المبلغ القديم (ل.س)</label>
-                <input type="number" id="oldAmount" placeholder="مثال: 12500" oninput="calculate()">
-            </div>
-
-            <div class="result-box">
-                <div class="result-title">المبلغ بالعملة الجديدة</div>
-                <div class="result-value" id="newAmount">0</div>
-                <div class="currency-symbol">ليرة جديدة</div>
-            </div>
-        </div>
-        <div class="footer">تم التطوير بواسطة: MhdGameAlHumsi</div>
-    </div>
-
-    <script>
-        function calculate() {
-            const oldVal = document.getElementById('oldAmount').value;
-            // المعادلة: القسمة على 100
-            const newVal = oldVal / 100; 
-            
-            if (oldVal === "") {
-                document.getElementById('newAmount').innerText = "0";
-            } else {
-                // عرض الرقم مع الفواصل
-                document.getElementById('newAmount').innerText = newVal.toLocaleString('en-US');
-            }
+        /* الشعار والعنوان العلوي */
+        .header-container {
+            text-align: center;
+            margin-bottom: 40px;
+            margin-top: 20px;
         }
-    </script>
 
-</body>
-</html>
+        .logo-eagle {
+            width: 120px;
+            height: auto;
+            margin-bottom: 15px;
+        }
+        /* كود SVG للنسر الذهبي */
+        .logo-eagle path { fill: var(--text-gold); }
+
+        .main-title {
+            color: var(--text-white);
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin: 0;
+        }
+
+        /* الكرت الأبيض الرئيسي */
+        .main-card {
+            background-color: var(--text-white);
+            border-radius: 35px; /* زوايا دائرية كبيرة */
+            padding: 40px;
+            width: 100%;
+            max-width: 800px; /* عرض أكبر ليستوعب الحقلين بجانب بعض */
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+            text-align: center;
+        }
+
+        .card-title {
+            color: var(--text-gold);
+            font-size: 1.2rem;
+            font-weight: 600;
+            margin-bottom: 30px;
+            line-height: 1.6;
+        }
+
+        /* حاوية حقول الإدخال (لتكون بجانب بعضها) */
+        .converter-container {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 20px;
+        }
+
+        .input-wrapper {
+            flex: 1; /* يأخذ مساحة متساوية */
+            position: relative;
+        }
+
+        /* تنسيق حقول الإدخال */
+        .custom-input {
+            width: 100%;
+            padding: 18px 20px;
+            font-size: 1.1rem;
+            color: var(--text-gold);
+            background-color: var(--input-bg);
+            border: 2px solid var(--text-gold);
+            border-radius: 15px;
+            text-align: right;
+            font-family: 'Cairo', sans-
