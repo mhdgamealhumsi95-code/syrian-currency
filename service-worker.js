@@ -1,4 +1,4 @@
-const CACHE_NAME = "currency-app-v1";
+const CACHE_NAME = "currency-app-v2";
 const ASSETS = [
   "./",
   "./index.html",
@@ -21,4 +21,5 @@ self.addEventListener("fetch", (e) => {
       return response || fetch(e.request);
     })
   );
+
 });
