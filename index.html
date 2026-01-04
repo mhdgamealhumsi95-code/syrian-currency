@@ -10,128 +10,232 @@
     <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@500;700;800&display=swap" rel="stylesheet">
     <style>
         :root {
-            --bg-color: #013430;       /* الأخضر العميق */
-            --gold-color: #C5A065;     /* الذهبي الفاخر */
+            --bg-color: #013430;
+            --gold-color: #C5A065;
             --white-color: #FFFFFF;
             --input-bg: #F5F5F5;
+            --btn-hover: #b08d55;
         }
 
         body {
             background-color: var(--bg-color);
             font-family: 'Tajawal', sans-serif;
             margin: 0;
-            padding: 0;
-            height: 100vh;
+            padding: 20px 0;
+            min-height: 100vh;
             display: flex;
             flex-direction: column;
             align-items: center;
             justify-content: center;
         }
 
-        /* 1. تنسيق صورة النسر */
         .eagle-container {
             margin-bottom: 20px;
             text-align: center;
         }
         
         .eagle-icon {
-            width: 150px; /* حجم النسر */
+            width: 120px;
             height: auto;
-            fill: var(--gold-color); /* لون ذهبي للرسمة */
+            fill: var(--gold-color);
         }
 
-        /* 2. العنوان الرئيسي */
         h1 {
             color: var(--white-color);
-            font-size: 2.5rem;
+            font-size: 2.2rem;
             font-weight: 800;
-            margin: 0 0 40px 0;
+            margin: 0 0 30px 0;
+            text-align: center;
         }
 
-        /* 3. الكرت الأبيض العريض */
         .card {
             background-color: var(--white-color);
-            width: 80%;
-            max-width: 900px; /* عرض ثابت ليناسب الخانتين */
-            border-radius: 35px;
-            padding: 50px;
+            width: 85%;
+            max-width: 800px;
+            border-radius: 30px;
+            padding: 40px;
             box-shadow: 0 20px 50px rgba(0,0,0,0.4);
             text-align: center;
+            position: relative;
         }
 
         .card-header {
             color: #998353;
-            font-size: 1.3rem;
+            font-size: 1.2rem;
             font-weight: 700;
-            margin-bottom: 40px;
+            margin-bottom: 30px;
             line-height: 1.6;
         }
 
-        /* 4. منطقة التحويل (المهمة جداً) */
         .converter-wrapper {
-            display: flex; /* ترتيب بجانب بعض */
+            display: flex;
             align-items: center;
             justify-content: space-between;
-            gap: 20px;
+            gap: 15px;
+            margin-bottom: 30px;
         }
 
-        /* تنسيق الخانات */
-        .input-box {
+        .input-box-container {
             position: relative;
-            width: 45%; /* كل خانة تأخذ أقل من النصف بقليل */
+            width: 45%;
         }
 
         input {
             width: 100%;
-            padding: 20px;
-            padding-left: 60px; /* مساحة لكلمة ل.س */
-            font-size: 1.2rem;
+            padding: 15px;
+            padding-left: 50px; /* مساحة للرمز */
+            font-size: 1.1rem;
             border: 2px solid var(--gold-color);
-            border-radius: 50px;
+            border-radius: 20px;
             background-color: var(--input-bg);
             color: #333;
             font-family: 'Tajawal', sans-serif;
             font-weight: bold;
             text-align: right;
             outline: none;
-            box-sizing: border-box; /* ضروري لضبط الحجم */
+            box-sizing: border-box;
+            transition: 0.3s;
+        }
+
+        input:focus {
+            box-shadow: 0 0 10px rgba(197, 160, 101, 0.3);
         }
 
         .currency-tag {
             position: absolute;
-            left: 25px;
+            left: 15px;
             top: 50%;
             transform: translateY(-50%);
             color: #888;
             font-weight: bold;
+            font-size: 0.9rem;
         }
 
-        /* 5. أيقونة السهم في الوسط */
+        /* زر النسخ الصغير */
+        .copy-btn {
+            position: absolute;
+            left: 55px; /* بجانب كلمة ل.س */
+            top: 50%;
+            transform: translateY(-50%);
+            background: none;
+            border: none;
+            cursor: pointer;
+            font-size: 1.2rem;
+            padding: 5px;
+            border-radius: 5px;
+            transition: 0.2s;
+        }
+        .copy-btn:active {
+            transform: translateY(-50%) scale(0.9);
+        }
+
         .swap-arrow {
             color: var(--gold-color);
-            font-size: 2rem;
+            font-size: 1.8rem;
         }
 
-        /* تعديل بسيط للموبايل */
+        /* تنسيق الأزرار السفلية */
+        .actions-container {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            flex-wrap: wrap;
+            margin-top: 20px;
+            width: 85%;
+            max-width: 800px;
+        }
+
+        .action-btn {
+            background-color: var(--gold-color);
+            color: white;
+            border: none;
+            padding: 12px 25px;
+            border-radius: 15px;
+            font-family: 'Tajawal', sans-serif;
+            font-weight: bold;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            transition: 0.3s;
+            text-decoration: none;
+            font-size: 1rem;
+        }
+
+        .action-btn:hover {
+            background-color: var(--btn-hover);
+            transform: translateY(-2px);
+        }
+
+        .whatsapp-btn {
+            background-color: #25D366; /* لون واتساب */
+        }
+        .whatsapp-btn:hover {
+            background-color: #1ebc57;
+        }
+
+        /* زر التثبيت مخفي افتراضياً */
+        #installBtn {
+            display: none; 
+            background-color: #333;
+        }
+
+        /* سجل العمليات */
+        .history-section {
+            margin-top: 20px;
+            border-top: 1px solid #eee;
+            padding-top: 15px;
+            font-size: 0.9rem;
+            color: #666;
+            text-align: right;
+        }
+        .history-title {
+            font-weight: bold;
+            color: var(--gold-color);
+            margin-bottom: 10px;
+            text-align: center;
+        }
+        .history-list {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+        .history-item {
+            display: flex;
+            justify-content: space-between;
+            background: #f9f9f9;
+            margin-bottom: 5px;
+            padding: 8px 15px;
+            border-radius: 10px;
+        }
+
+        /* تنسيق الجوال */
         @media (max-width: 700px) {
             .converter-wrapper {
                 flex-direction: column;
             }
-            .input-box {
+            .input-box-container {
                 width: 100%;
             }
             .swap-arrow {
                 transform: rotate(90deg);
-                margin: 15px 0;
+                margin: 10px 0;
             }
             .card {
-                padding: 30px 20px;
+                padding: 25px 20px;
                 width: 90%;
             }
-            
-            /* 👇 التعديل الجديد لتصغير العنوان */
             h1 {
-                font-size: 1.7rem;
+                font-size: 1.6rem;
+            }
+            .actions-container {
+                flex-direction: column;
+                width: 90%;
+            }
+            .action-btn {
+                justify-content: center;
+                width: 100%;
+                box-sizing: border-box;
             }
         }
     </style>
@@ -146,59 +250,146 @@
 
     <div class="card">
         <div class="card-header">
-            الليرة السورية القديمة
+            أدخل المبلغ في أي خانة
             <br>
-            وما يعادلها على الليرة الجديدة
+            للتحويل المباشر
         </div>
 
         <div class="converter-wrapper">
             
-            <div class="input-box">
-                <input type="number" id="oldAmount" placeholder="ادخل قيمة العملة القديمة" oninput="calculate()">
+            <div class="input-box-container">
+                <input type="number" id="oldAmount" placeholder="القديمة" oninput="handleInput('old')">
                 <span class="currency-tag">ل.س</span>
             </div>
 
-            <div class="swap-arrow">
-                ⇄
-            </div>
+            <div class="swap-arrow">⇄</div>
 
-            <div class="input-box">
-                <input type="text" id="newAmount" placeholder="قيمتها على العملة الجديدة" readonly>
+            <div class="input-box-container">
+                <input type="number" id="newAmount" placeholder="الجديدة" oninput="handleInput('new')">
+                <button class="copy-btn" onclick="copyResult()" title="نسخ المبلغ">📋</button>
                 <span class="currency-tag">ل.س</span>
             </div>
 
         </div>
+
+        <div class="history-section" id="historySection" style="display: none;">
+            <div class="history-title">آخر العمليات الحسابية</div>
+            <ul class="history-list" id="historyList">
+                </ul>
+        </div>
+    </div>
+
+    <div class="actions-container">
+        <a href="#" onclick="shareOnWhatsapp()" class="action-btn whatsapp-btn">
+            <span>نشر التطبيق</span> 💬
+        </a>
+
+        <button id="installBtn" class="action-btn">
+            <span>تثبيت التطبيق</span> 📲
+        </button>
     </div>
     
-    <div style="text-align: center; margin-top: 20px; color: white;">
+    <div style="text-align: center; margin-top: 30px; color: rgba(255,255,255,0.6); font-size: 0.8rem;">
         <p>تم التطوير بواسطة [Mohamad Alhumsi]</p>
     </div>
 
     <script>
-        function calculate() {
-            // جلب الرقم من الخانة الأولى
-            let oldVal = document.getElementById('oldAmount').value;
-            let newBox = document.getElementById('newAmount');
+        // 1. منطق التحويل (الذكي)
+        let debounceTimer; // مؤقت لتأخير الحفظ في السجل
+        
+        function handleInput(source) {
+            const oldInput = document.getElementById('oldAmount');
+            const newInput = document.getElementById('newAmount');
+            let val = 0;
 
-            // التأكد من أن الرقم موجود
-            if (oldVal === "" || oldVal == 0) {
-                newBox.value = "";
+            if (source === 'old') {
+                val = parseFloat(oldInput.value);
+                if (!isNaN(val)) {
+                    newInput.value = parseFloat((val / 100).toFixed(2)); // حساب الجديدة
+                } else {
+                    newInput.value = '';
+                }
             } else {
-                // المعادلة: حذف صفرين (تقسيم على 100)
-                let result = oldVal / 100;
-                
-                // عرض النتيجة مع فواصل
-                newBox.value = result.toLocaleString('en-US');
+                val = parseFloat(newInput.value);
+                if (!isNaN(val)) {
+                    oldInput.value = Math.round(val * 100); // حساب القديمة
+                } else {
+                    oldInput.value = '';
+                }
+            }
+
+            // إضافة للسجل بعد التوقف عن الكتابة بـ 1 ثانية
+            clearTimeout(debounceTimer);
+            if (oldInput.value && newInput.value) {
+                debounceTimer = setTimeout(() => {
+                    addToHistory(oldInput.value, newInput.value);
+                }, 1000);
             }
         }
-    </script>
 
-    <script>
+        // 2. منطق زر النسخ
+        function copyResult() {
+            const newVal = document.getElementById('newAmount');
+            if (newVal.value) {
+                navigator.clipboard.writeText(newVal.value).then(() => {
+                    alert('تم نسخ المبلغ: ' + newVal.value);
+                });
+            }
+        }
+
+        // 3. منطق سجل العمليات
+        function addToHistory(oldVal, newVal) {
+            const historySection = document.getElementById('historySection');
+            const list = document.getElementById('historyList');
+            
+            historySection.style.display = 'block';
+
+            // إنشاء عنصر جديد
+            const li = document.createElement('li');
+            li.className = 'history-item';
+            li.innerHTML = `<span>${Number(oldVal).toLocaleString()} قديمة</span> <span>⬅️</span> <span>${Number(newVal).toLocaleString()} جديدة</span>`;
+
+            // إضافة في البداية وحذف الزائد عن 3
+            list.insertBefore(li, list.firstChild);
+            if (list.children.length > 3) {
+                list.removeChild(list.lastChild);
+            }
+        }
+
+        // 4. منطق زر الواتساب
+        function shareOnWhatsapp() {
+            const url = window.location.href;
+            const text = `جرب هذا التطبيق الرائع لتحويل الليرة السورية الجديدة! سهل وسريع ويعمل بدون نت: \n${url}`;
+            window.open(`https://wa.me/?text=${encodeURIComponent(text)}`, '_blank');
+        }
+
+        // 5. منطق زر التثبيت (PWA Install)
+        let deferredPrompt;
+        const installBtn = document.getElementById('installBtn');
+
+        window.addEventListener('beforeinstallprompt', (e) => {
+            e.preventDefault();
+            deferredPrompt = e;
+            installBtn.style.display = 'flex'; // إظهار الزر
+        });
+
+        installBtn.addEventListener('click', async () => {
+            if (deferredPrompt) {
+                deferredPrompt.prompt();
+                const { outcome } = await deferredPrompt.userChoice;
+                if (outcome === 'accepted') {
+                    installBtn.style.display = 'none';
+                }
+                deferredPrompt = null;
+            }
+        });
+
+        // 6. تشغيل Service Worker
         if ('serviceWorker' in navigator) {
             window.addEventListener('load', () => {
                 navigator.serviceWorker.register('service-worker.js')
-                    .then(() => console.log('تم تشغيل وضع الأوفلاين بنجاح'))
-                    .catch((err) => console.log('فشل تشغيل وضع الأوفلاين', err));
+                    .then(() => console.log('Service Worker Ready'))
+                    .catch((err) => console.log('Service Worker Failed', err));
             });
         }
     </script>
