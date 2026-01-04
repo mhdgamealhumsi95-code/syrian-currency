@@ -187,9 +187,20 @@
             }
         }
     </script>
+<link rel="manifest" href="manifest.json">
 
+    <script>
+        if ('serviceWorker' in navigator) {
+            window.addEventListener('load', () => {
+                navigator.serviceWorker.register('service-worker.js')
+                    .then(() => console.log('تم تشغيل وضع الأوفلاين بنجاح'))
+                    .catch((err) => console.log('فشل تشغيل وضع الأوفلاين', err));
+            });
+        }
+    </script>
 </body>
 </html>
+
 
 
 
