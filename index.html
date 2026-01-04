@@ -4,6 +4,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>الليرة السورية الجديدة</title>
+    
+    <link rel="manifest" href="manifest.json">
+    
     <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@500;700;800&display=swap" rel="stylesheet">
     <style>
         :root {
@@ -109,7 +112,7 @@
             font-size: 2rem;
         }
 
-      /* تعديل بسيط للموبايل */
+        /* تعديل بسيط للموبايل */
         @media (max-width: 700px) {
             .converter-wrapper {
                 flex-direction: column;
@@ -166,9 +169,11 @@
 
         </div>
     </div>
-<div style="text-align: center; margin-top: 20px; color: white;">
-    <p>تم التطوير بواسطة [Mohamad Alhumsi]</p>
-</div>
+    
+    <div style="text-align: center; margin-top: 20px; color: white;">
+        <p>تم التطوير بواسطة [Mohamad Alhumsi]</p>
+    </div>
+
     <script>
         function calculate() {
             // جلب الرقم من الخانة الأولى
@@ -187,7 +192,6 @@
             }
         }
     </script>
-<link rel="manifest" href="manifest.json">
 
     <script>
         if ('serviceWorker' in navigator) {
@@ -200,9 +204,3 @@
     </script>
 </body>
 </html>
-
-
-
-
-
-
