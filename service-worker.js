@@ -3,6 +3,7 @@ const ASSETS = [
   "./",
   "./index.html",
   "./logo.png"
+"./manifest.json" //
 ];
 
 // 1. تثبيت الخدمة وحفظ الملفات
@@ -23,3 +24,4 @@ self.addEventListener("fetch", (e) => {
   );
 
 });
+
