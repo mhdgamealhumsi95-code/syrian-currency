@@ -1,0 +1,15 @@
+{
+  "name": "محول العملة السورية",
+  "short_name": "محول العملة",
+  "start_url": "index.html",
+  "display": "standalone",
+  "background_color": "#013430",
+  "theme_color": "#013430",
+  "icons": [
+    {
+      "src": "logo.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    }
+  ]
+}
