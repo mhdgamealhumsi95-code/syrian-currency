@@ -173,12 +173,19 @@
     <div class="card">
         <div class="card-title">🔄 المحول السريع</div>
         
-        <div class="input-group">
-            <span class="label-text">أدخل المبلغ (تتحول تلقائياً):</span>
-            <div class="flex-row">
-                <input type="number" id="oldAmount" placeholder="الليرة السورية القديمة" oninput="convertCurrency('old')">
-                <input type="number" id="newAmount" placeholder="الليرة السورية الجديدة" oninput="convertCurrency('new')">
-            </div>
+       <div class="input-box-container">
+    <div class="input-label">العملة القديمة</div>
+    
+    <input type="number" class="main-input" ... (باقي الكود كما هو)>
+    <span class="currency-tag">ليرة سورية</span>
+</div>
+
+<div class="input-box-container">
+    <div class="input-label">العملة الجديدة</div>
+
+    <input type="number" class="main-input" ... (باقي الكود كما هو)>
+    ...
+</div>
         </div>
         
         <div style="font-size: 0.8rem; color: #888; margin-top: 10px;">
@@ -328,6 +335,7 @@
     </script>
 </body>
 </html>
+
 
 
 
